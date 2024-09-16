@@ -1,9 +1,11 @@
 let tabella = document.getElementById("Gioco");
+let restartButton = document.getElementById("Restart");
 var matrice =[];
 let turnoP = true;
 let gameOver = false;
-let players = ['g','r'];
 let altezza = [5,5,5,5,5,5,5];
+let players = ['g','r'];
+restartButton.onclick = start;
 for(let i = 0; i < 6; i++){
     matrice[i] = [];
     for(let j = 0; j < 7; j++){
@@ -15,8 +17,6 @@ for(let i = 0; i < 6; i++){
         tabella.appendChild(blocco);
     }
 }
-let h1 = document.createElement("h1");
-tabella.appendChild(h1);
 
 function click(){
     if(!gameOver){
@@ -109,4 +109,24 @@ function controllaVittoria(){
         }
     }
     
+}
+
+function start(){
+    matrice =[];
+    turnoP = true;
+    gameOver = false;
+    altezza = [5,5,5,5,5,5,5];
+    players = ['g','r'];
+    tabella.innerHTML = "";
+    for(let i = 0; i < 6; i++){
+        matrice[i] = [];
+        for(let j = 0; j < 7; j++){
+            matrice[i][j] = `v${i}${j}`;
+            let blocco = document.createElement("div");
+            blocco.id = `${i}${j}`
+            blocco.addEventListener("click", click);
+            blocco.style = "border: 1px solid black; width: 50px; height: 50px; float: left";
+            tabella.appendChild(blocco);
+        }
+    }
 }
